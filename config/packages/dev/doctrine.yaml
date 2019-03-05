@@ -1,0 +1,9 @@
+doctrine:
+  dbal:
+    charset: utf8
+    driver: pdo_pgsql
+    user: '%env(resolve:PSQL_USER)%'
+    password: '%env(resolve:PSQL_PASS)%'
+    dbname: '%env(resolve:PSQL_DATABASE)%'
+    host: '%env(resolve:PSQL_HOST)%'
+    port: '%env(resolve:PSQL_PORT)%'

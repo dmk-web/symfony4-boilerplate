@@ -1,11 +1,19 @@
-App\Domain\User\ValueObject\Auth\Credentials:
-  type: embeddable
-  indexes:
-    name_index:
-      columns: [ email ]
+App\Domain\User\Entity\User:
+  type: entity
+  table: users
   fields:
-    email:
+    name:
+      type: string
+      length: 255
+    login:
       type: string
       unique: true
+      length: 60
     password:
       type: string
+      length: 255
+    role:
+      type: string
+      length: 20
+    isActivated:
+      type: boolean

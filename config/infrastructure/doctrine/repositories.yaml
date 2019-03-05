@@ -1,0 +1,19 @@
+services:
+  _instanceof:
+    App\Infrastructure\Doctrine\Repository\BaseDoctrineRepository:
+      tags: ['doctrine.repository']
+      calls:
+        - ['setEntityManager', ['@doctrine.orm.entity_manager']]
+
+  App\Infrastructure\Doctrine\Repository\DoctrineTransaction:
+    arguments:
+      $manager: '@doctrine.orm.entity_manager'
+
+  App\Infrastructure\Doctrine\Interfaces\TransactionInterface:
+    alias: App\Infrastructure\Doctrine\Repository\DoctrineTransaction
+
+  Doctrine\ORM\EntityManager: '@doctrine.orm.entity_manager'
+
+  App\Infrastructure\Doctrine\Repository\:
+    resource: '%kernel.root_dir%/Infrastructure/Doctrine/Repository/**/*Repository.php'
+    autowire: true

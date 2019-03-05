@@ -1,0 +1,10 @@
+imports:
+  - { resource: 'auth.yaml' }
+  - { resource: 'doctrine/repositories.yaml' }
+  - { resource: 'http/listeners.yaml' }
+  - { resource: 'http/resolvers.yaml' }
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true

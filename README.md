@@ -1,2 +1,2 @@
-# symfony4-boilerplate
-Symfony 4 boilerplate
+# Symfony4 REST Api boilerplate
+Author: **dmk-web**

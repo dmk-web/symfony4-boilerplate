@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  commands:
+    namespace: App\Application\Cqs\
+    resource: '%kernel.root_dir%/Application/Cqs/**/*Command.php'
+
+  queries:
+    namespace: App\Application\Cqs\
+    resource: '%kernel.root_dir%/Application/Cqs/**/*Query.php'

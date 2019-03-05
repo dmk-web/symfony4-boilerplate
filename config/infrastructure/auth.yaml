@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  TokenAuthenticator:
+    class: App\Security\JwtAuthenticator
+    arguments: ['@lexik_jwt_authentication.encoder']

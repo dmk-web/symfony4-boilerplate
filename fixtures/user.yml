@@ -1,5 +1,0 @@
-App\Domain\User\User:
-  user{1..10}:
-    username: '<username()>'
-    email: '<email()>'
-    hashedPassword: '<password()>'

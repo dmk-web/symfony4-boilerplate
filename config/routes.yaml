@@ -1,4 +1,8 @@
-api_controllers:
-  resource: '../src/Application/Controller/'
+api:
+  resource: '../src/Application/Http'
   type: annotation
   prefix: /api
+auth:
+  resource: '../src/Application/Http/Auth/*'
+  type: annotation
+  prefix: /auth

@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+
+  App\Infrastructure\Http\Resolver\:
+    resource: '%kernel.root_dir%/Infrastructure/Http/Resolver/*Resolver.php'
+    tags: ['controller.argument_value_resolver']

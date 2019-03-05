@@ -1,0 +1,8 @@
+services:
+  _defaults:
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  App\Application\Cli\:
+    resource: '%kernel.root_dir%/Application/Cli/**/*Command.php'
