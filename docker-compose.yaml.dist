@@ -8,8 +8,6 @@ services:
       - 9006:9006
     depends_on:
       - db
-    networks:
-      - main
 
   nginx:
     image: nginx:latest
@@ -23,8 +21,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    networks:
-      - main
 
   db:
     image: postgres:latest
@@ -37,9 +33,3 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: project
       PGDATA: /data/postgres
-    networks:
-      - main
-
-networks:
-  main:
-    driver: bridge

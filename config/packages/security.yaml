@@ -5,9 +5,13 @@ services:
     autoconfigure: true
 
   security.user.api_user_provider:
-    class: App\Infrastructure\Security\ApiUserProvider
+    class: App\Infrastructure\Security\AuthProvider
 
 security:
+  encoders:
+    App\Domain\User\Entity\User:
+      algorithm: bcrypt
+
   providers:
     api_user_provider:
       id: security.user.api_user_provider

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\User\UserExceptions;
+namespace App\Domain\User\Exceptions;
 
 
 use App\Infrastructure\Doctrine\Exceptions\RepositoryException;

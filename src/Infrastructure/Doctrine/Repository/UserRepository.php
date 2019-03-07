@@ -3,10 +3,10 @@
 namespace App\Infrastructure\Doctrine\Repository;
 
 
-use App\Domain\Entity\User\User;
+use App\Domain\User\Entity\User;
+use App\Domain\User\Exceptions\UserAlreadyAddedException;
+use App\Domain\User\Exceptions\UserNotFoundException;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Domain\User\UserExceptions\UserAlreadyAddedException;
-use App\Domain\User\UserExceptions\UserNotFoundException;
 use Ramsey\Uuid\Uuid;
 
 class UserRepository extends BaseDoctrineRepository implements UserRepositoryInterface
@@ -20,7 +20,7 @@ class UserRepository extends BaseDoctrineRepository implements UserRepositoryInt
         $this->entityManager->persist($user);
     }
 
-    public function get(Uuid $userId): User
+    public function get(string $userId): User
     {
         $user = $this->entityManager->find(User::class, $userId);
 

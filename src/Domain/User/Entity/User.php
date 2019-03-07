@@ -1,43 +1,39 @@
 <?php
 
-namespace App\Domain\Entity\User;
+namespace App\Domain\User\Entity;
 
 
 use App\Domain\Common\Traits\CreatedAt;
 use App\Domain\Common\Traits\Entity;
 use App\Domain\Common\Traits\UpdatedAt;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class User
+class User implements UserInterface
 {
     use Entity, CreatedAt, UpdatedAt;
 
     public const ADMIN_ROLE = 'ADMIN_ROLE';
 
-    private $name;
+    private $username;
     private $login;
     private $password;
-    private $role;
+    private $roles;
     private $isActivated = true;
 
-    public function __construct(string $name, string $login, string $password, string $role)
+    public function __construct(string $username, string $login, string $password, array $roles)
     {
         $this->identify();
         $this->onCreated();
 
-        $this->name = $name;
+        $this->username = $username;
         $this->login = $login;
         $this->password = $password;
-        $this->role = $role;
+        $this->roles = $roles;
     }
 
-    public function getRole(): string
+    public function getUsername(): string
     {
-        return $this->role;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
+        return $this->username;
     }
 
     public function getLogin(): string
@@ -55,6 +51,11 @@ class User
         $this->password = $password;
     }
 
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+    }
+
     public function isActivated(): bool
     {
         return $this->isActivated;
@@ -70,5 +71,20 @@ class User
     {
         $this->isActivated = true;
         $this->onUpdated();
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function getSalt()
+    {
+        return;
+    }
+
+    public function eraseCredentials()
+    {
+        return;
     }
 }

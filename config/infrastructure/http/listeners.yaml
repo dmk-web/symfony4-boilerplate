@@ -9,12 +9,12 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.view, method: handle }
 
-  http.listener.handled_exception:
-    class: App\Infrastructure\Http\Listener\RuntimeExceptionListener
+  http.listener.validation_exception:
+    class: App\Infrastructure\Http\Listener\ValidationExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: handle }
 
-  http.listener.validation_exception:
-    class: App\Infrastructure\Http\Listener\ValidationExceptionListener
+  http.listener.handled_exception:
+    class: App\Infrastructure\Http\Listener\RuntimeExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: handle }

@@ -12,7 +12,7 @@ class TokenController
     /**
      * @Route("/token", methods={"POST"})
      */
-    public function obtain(GetTokenCommand $command, TokenInput $input)
+    public function get(GetTokenCommand $command, TokenInput $input)
     {
         return $command->execute($input);
     }

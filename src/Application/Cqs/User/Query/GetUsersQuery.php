@@ -4,7 +4,7 @@ namespace App\Application\Cqs\User\Query;
 
 
 use App\Application\Cqs\User\Output\UserOutput;
-use App\Domain\Entity\User\User;
+use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepositoryInterface;
 
 class GetUsersQuery

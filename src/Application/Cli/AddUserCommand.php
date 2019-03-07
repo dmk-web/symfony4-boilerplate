@@ -3,7 +3,7 @@
 namespace App\Application\Cli;
 
 
-use App\Domain\Entity\User\User;
+use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepositoryInterface;
 use App\Infrastructure\Doctrine\Interfaces\TransactionInterface;
 use Symfony\Component\Console\Command\Command;
@@ -26,26 +26,26 @@ class AddUserCommand extends Command
 
     protected function configure()
     {
-        $this->addOption('name', 'd', InputOption::VALUE_REQUIRED);
-        $this->addOption('login', 'u', InputOption::VALUE_REQUIRED);
+        $this->addOption('username', 'u', InputOption::VALUE_REQUIRED);
+        $this->addOption('login', 'l', InputOption::VALUE_REQUIRED);
         $this->addOption('password', 'p', InputOption::VALUE_REQUIRED);
         $this->addOption('role', 'r', InputOption::VALUE_REQUIRED);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        [$name, $login, $password, $role] = [
-            $input->getOption('name'),
+        [$username, $login, $password, $role] = [
+            $input->getOption('username'),
             $input->getOption('login'),
             $input->getOption('password'),
             $input->getOption('role')
         ];
 
-        $this->transaction->transactional(function () use ($name, $login, $password, $role) {
-            $this->userRepository->add(new User($name, $login, password_hash($password, PASSWORD_BCRYPT), $role));
+        $this->transaction->transactional(function () use ($username, $login, $password, $role) {
+            $this->userRepository->add(new User($username, $login, password_hash($password, PASSWORD_BCRYPT), [$role]));
         });
 
-        $output->writeln("User {$name} successfully added!");
+        $output->writeln("User {$username} successfully added!");
     }
 }
 

@@ -3,9 +3,10 @@
 namespace App\Infrastructure\Security;
 
 
-use App\Domain\Entity\User\User;
+use App\Domain\User\Entity\User;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 
 class AuthUserAdapter implements UserInterface
 {
@@ -23,7 +24,7 @@ class AuthUserAdapter implements UserInterface
 
     public function getRoles()
     {
-        return [$this->user->getRole()];
+        return $this->user->getRoles();
     }
 
     public function getPassword()
