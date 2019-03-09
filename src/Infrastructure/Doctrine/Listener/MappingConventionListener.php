@@ -17,7 +17,7 @@ class MappingConventionListener
         if (in_array(Entity::class, $traits, true) && !$metadata->hasField('id')) {
             $metadata->mapField([
                 'id' => true,
-                'type' => 'uuid_binary',
+                'type' => 'uuid',
                 'fieldName' => 'id',
                 'columnName' => 'id'
             ]);
