@@ -13,9 +13,7 @@ doctrine:
     naming_strategy: doctrine.orm.naming_strategy.underscore
     auto_mapping: true
     mappings:
-      Domain:
-        is_bundle: false
+      user:
         type: yml
-        dir: '%kernel.project_dir%/config/mappings'
-        prefix: 'App\Domain'
-        alias: Domain
+        prefix: 'App\Domain\User\Entity'
+        dir: '%kernel.project_dir%/config/mappings/User'

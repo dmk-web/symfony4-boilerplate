@@ -5,7 +5,6 @@ namespace App\Application\Cqs\User\Query;
 
 use App\Application\Cqs\User\Output\UserOutput;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use Ramsey\Uuid\Uuid;
 
 class GetUserQuery
 {
@@ -16,7 +15,7 @@ class GetUserQuery
         $this->userRepository = $userRepository;
     }
 
-    public function execute(Uuid $userId): UserOutput
+    public function execute(string $userId): UserOutput
     {
         return UserOutput::from($this->userRepository->get($userId));
     }

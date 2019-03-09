@@ -1,6 +1,7 @@
 imports:
   - { resource: 'auth.yaml' }
   - { resource: 'doctrine/repositories.yaml' }
+  - { resource: 'doctrine/listeners.yaml' }
   - { resource: 'http/listeners.yaml' }
   - { resource: 'http/resolvers.yaml' }
 

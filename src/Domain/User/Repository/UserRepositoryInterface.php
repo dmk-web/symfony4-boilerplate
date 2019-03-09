@@ -2,14 +2,14 @@
 
 namespace App\Domain\User\Repository;
 
-use App\Domain\Entity\User\User;
+use App\Domain\User\Entity\User;
 use Ramsey\Uuid\Uuid;
 
 interface UserRepositoryInterface
 {
     public function add(User $user);
 
-    public function get(Uuid $userId): User;
+    public function get(string $userId): User;
 
     public function has(Uuid $usedId): bool;
 

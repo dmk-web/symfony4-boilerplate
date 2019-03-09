@@ -12,7 +12,7 @@ class CreateUserInput
      *
      * @Assert\NotBlank()
      */
-    public $name;
+    public $username;
 
     /**
      * @var string
@@ -31,12 +31,9 @@ class CreateUserInput
     public $password;
 
     /**
-     * @var string
+     * @var array
      *
      * @Assert\NotBlank()
-     * @Assert\Choice({
-     *     User::ADMIN_ROLE
-     * })
      */
-    public $role;
+    public $roles;
 }

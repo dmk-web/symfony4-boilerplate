@@ -11,15 +11,15 @@ class TokenInput
      *
      * @var string
      *
-     * @Assert\NotBlank(message = ObtainTokensInput::BLANK_USERNAME)
+     * @Assert\NotBlank()
      */
-    public $username;
+    public $login;
 
     /**
      *
      * @var string
      *
-     * @Assert\NotBlank(message = ObtainTokensInput::BLANK_PASSWORD)
+     * @Assert\NotBlank()
      */
     public $password;
 }

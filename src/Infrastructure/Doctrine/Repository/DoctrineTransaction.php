@@ -6,9 +6,6 @@ namespace App\Infrastructure\Doctrine\Repository;
 use App\Infrastructure\Doctrine\Interfaces\TransactionInterface;
 use Doctrine\ORM\EntityManager;
 
-/**
- * Реализация UnitOfWork для doctrine orm.
- */
 class DoctrineTransaction implements TransactionInterface
 {
     private $manager;

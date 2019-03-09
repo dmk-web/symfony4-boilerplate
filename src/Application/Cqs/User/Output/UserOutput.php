@@ -3,7 +3,7 @@
 namespace App\Application\Cqs\User\Output;
 
 
-use App\Domain\Entity\User\User;
+use App\Domain\User\Entity\User;
 use Ramsey\Uuid\Uuid;
 
 class UserOutput
@@ -25,9 +25,9 @@ class UserOutput
     public $login;
 
     /**
-     * @var string
+     * @var array
      */
-    public $role;
+    public $roles;
 
     /**
      * @var \DateTimeImmutable
@@ -43,9 +43,9 @@ class UserOutput
     {
         $self = new self();
         $self->id = $user->getId();
-        $self->name = $user->getName();
+        $self->name = $user->getUsername();
         $self->login = $user->getLogin();
-        $self->role = $user->getRole();
+        $self->roles = $user->getRoles();
         $self->createdAt = $user->getCreatedAt();
         $self->updatedAt = $user->getUpdatedAt();
 

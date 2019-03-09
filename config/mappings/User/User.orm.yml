@@ -2,7 +2,7 @@ App\Domain\User\Entity\User:
   type: entity
   table: users
   fields:
-    name:
+    username:
       type: string
       length: 255
     login:
@@ -12,8 +12,8 @@ App\Domain\User\Entity\User:
     password:
       type: string
       length: 255
-    role:
-      type: string
+    roles:
+      type: json_array
       length: 20
     isActivated:
       type: boolean

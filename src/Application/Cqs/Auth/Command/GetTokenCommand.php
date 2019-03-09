@@ -5,8 +5,8 @@ namespace App\Application\Cqs\Auth\Command;
 
 use App\Application\Cqs\Auth\Exception\InvalidCredentialsException;
 use App\Application\Cqs\Auth\Input\TokenInput;
+use App\Application\Cqs\Auth\Output\TokenOutput;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Infrastructure\Security\AuthUserAdapter;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -26,17 +26,13 @@ class GetTokenCommand
         $this->tokenManager = $tokenManager;
     }
 
-    public function execute(TokenInput $input): string
+    public function execute(TokenInput $input): TokenOutput
     {
-        $user = $this->userRepository->findByLogin($input->username);
-        if (!$user) {
-            throw InvalidCredentialsException::userNotFound($input->username);
-        }
-        $userAdapter = new AuthUserAdapter($user);
-        $isValid = $this->passwordEncoder->isPasswordValid($userAdapter, $input->password);
+        $user = $this->userRepository->findByLogin($input->login);
+        $isValid = ($user) ? $this->passwordEncoder->isPasswordValid($user, $input->password) : false;
         if (!$isValid) {
-            throw InvalidCredentialsException::userNotFound($input->username);
+            throw InvalidCredentialsException::userNotFound($input->login);
         }
-        return $this->tokenManager->create($userAdapter);
+        return TokenOutput::from($this->tokenManager->create($user));
     }
 }

@@ -8,7 +8,6 @@ use App\Application\Cqs\User\Command\CreateUserCommand;
 use App\Application\Cqs\User\Input\CreateUserInput;
 use App\Application\Cqs\User\Query\GetUserQuery;
 use App\Application\Cqs\User\Query\GetUsersQuery;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController
@@ -16,7 +15,7 @@ class UserController
     /**
      * @Route("/users/{userId}", methods={"GET"})
      */
-    public function get(Uuid $userId, GetUserQuery $query)
+    public function get(string $userId, GetUserQuery $query)
     {
         return $query->execute($userId);
     }
@@ -34,6 +33,6 @@ class UserController
      */
     public function create(CreateUserCommand $command, CreateUserInput $input)
     {
-        $command->execute($input);
+        return $command->execute($input);
     }
 }
