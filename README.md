@@ -1,10 +1,16 @@
-# Symfony4 REST Api boilerplate
+## Symfony4 REST Api boilerplate
 Author: **dmk-web**
 
-mkdir -p config/jwt
+**Project init**
+`make init`
 
-openssl genrsa -out config/jwt/private.pem -aes256 4096
+**Base URL**: http://localhost:8080 or http://project.dev
 
-openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
+# Endpoints
+### Auth:
+* GET /token - **get token by login and pass**
 
- sudo chmod 777 config/jwt/private.pem
+### User:
+* GET /users - **get list of users**
+* GET /users/{uuid} - **get user by id**
+* POST /users - **create new user**

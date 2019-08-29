@@ -4,10 +4,9 @@ services:
     build: ./docker/php
     volumes:
       - ./:/var/www
-    ports:
-      - 9006:9006
+      - composer:/root/.composer/cache
     depends_on:
-      - db
+      - postgres
 
   nginx:
     image: nginx:latest
@@ -19,17 +18,19 @@ services:
     depends_on:
       - php
     ports:
-      - 80:80
+      - 8080:80
       - 443:443
 
-  db:
-    image: postgres:latest
+  postgres:
+    image: postgres:11.2-alpine
     volumes:
-      - ./docker/storage/postgres:/data/postgres
+      - postgres:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 54321:5432
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: project
-      PGDATA: /data/postgres
+volumes:
+  postgres:
+  composer:

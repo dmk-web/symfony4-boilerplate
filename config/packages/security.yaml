@@ -7,9 +7,15 @@ services:
   security.user.api_user_provider:
     class: App\Infrastructure\Security\AuthProvider
 
+  App\Application\Security\LoggedUserProvider:
+    autowire: true
+
+  security.firewall.access_denied_handler:
+    class: App\Application\Security\AccessDeniedHandler
+
 security:
   encoders:
-    App\Domain\User\Entity\User:
+    App\Application\Security\SecurityAdapter:
       algorithm: bcrypt
 
   providers:
@@ -26,6 +32,7 @@ security:
       pattern: ^/(?!auth)
       stateless: true
       provider: api_user_provider
+      access_denied_handler: security.firewall.access_denied_handler
       guard:
         authenticators:
           - lexik_jwt_authentication.jwt_token_authenticator
