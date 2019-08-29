@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Doctrine\Interfaces;
-
+namespace App\Infrastructure\Doctrine\Transactions;
 
 interface TransactionInterface
 {

@@ -5,7 +5,7 @@ namespace App\Application\Cli;
 
 use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Infrastructure\Doctrine\Interfaces\TransactionInterface;
+use App\Infrastructure\Doctrine\Transactions\TransactionInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

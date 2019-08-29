@@ -8,7 +8,7 @@ use App\Application\Cqs\User\Input\CreateUserInput;
 use App\Application\Cqs\User\Output\UserOutput;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Infrastructure\Doctrine\Interfaces\TransactionInterface;
+use App\Infrastructure\Doctrine\Transactions\TransactionInterface;
 
 class CreateUserCommand
 {
@@ -27,7 +27,8 @@ class CreateUserCommand
             throw new CreationException("Login '{$input->login}' is already busied.");
         }
 
-        $user = new User($input->username, $input->login, password_hash($input->password, PASSWORD_BCRYPT), $input->roles);
+        $user = new User($input->username, $input->login, password_hash($input->password, PASSWORD_BCRYPT),
+            $input->roles);
         $this->transaction->transactional(function () use ($user) {
             $this->userRepository->add($user);
         });

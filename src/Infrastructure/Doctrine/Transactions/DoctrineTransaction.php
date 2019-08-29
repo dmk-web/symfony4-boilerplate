@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Infrastructure\Doctrine\Repository;
+namespace App\Infrastructure\Doctrine\Transactions;
 
-
-use App\Infrastructure\Doctrine\Interfaces\TransactionInterface;
 use Doctrine\ORM\EntityManager;
 
 class DoctrineTransaction implements TransactionInterface

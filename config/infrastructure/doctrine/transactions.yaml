@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Infrastructure\Doctrine\Transactions\DoctrineTransaction:
+    arguments:
+      $manager: '@doctrine.orm.entity_manager'
+
+  App\Infrastructure\Doctrine\Transactions\TransactionInterface:
+    alias: App\Infrastructure\Doctrine\Transactions\DoctrineTransaction
