@@ -3,9 +3,9 @@
 namespace App\Application\Cqs\User\Exception;
 
 
-use App\Application\Exception\RuntimeException;
+use App\Application\Exception\HandledException;
 
-class CreationException extends RuntimeException
+class CreationException extends HandledException
 {
     public static function loginIsBusy(string $login)
     {

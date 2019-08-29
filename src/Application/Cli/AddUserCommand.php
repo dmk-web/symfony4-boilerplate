@@ -5,7 +5,7 @@ namespace App\Application\Cli;
 
 use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Infrastructure\Doctrine\Transactions\TransactionInterface;
+use App\Domain\Common\Transactions\TransactionInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -18,7 +18,7 @@ class AddUserCommand extends Command
 
     public function __construct(UserRepositoryInterface $userRepository, TransactionInterface $transaction)
     {
-        parent::__construct('cli:add-user');
+        parent::__construct('cli:add:user');
 
         $this->userRepository = $userRepository;
         $this->transaction = $transaction;

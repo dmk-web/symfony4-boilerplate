@@ -2,10 +2,9 @@
 
 namespace App\Application\Cqs\Auth\Exception;
 
+use App\Application\Exception\HandledException;
 
-use App\Application\Exception\RuntimeException;
-
-class InvalidCredentialsException extends RuntimeException
+class InvalidCredentialsException extends HandledException
 {
     public static function userNotFound(string $username)
     {

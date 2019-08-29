@@ -15,6 +15,6 @@ services:
       - { name: kernel.event_listener, event: kernel.exception, method: handle }
 
   http.listener.handled_exception:
-    class: App\Infrastructure\Http\Listener\RuntimeExceptionListener
+    class: App\Infrastructure\Http\Listener\HandledExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: handle }

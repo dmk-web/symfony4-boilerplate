@@ -3,7 +3,7 @@
 namespace App\Application\Exception;
 
 
-class ValidationException extends RuntimeException
+class ValidationException extends \RuntimeException
 {
     private $messages;
 

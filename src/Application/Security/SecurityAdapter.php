@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Infrastructure\Security;
-
+namespace App\Application\Security;
 
 use App\Domain\User\Entity\User;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
-class AuthUserAdapter implements UserInterface
+class SecurityAdapter implements UserInterface
 {
-    private $user;
+    /** @var User */
+    public $user;
 
     public function __construct(User $user)
     {
         $this->user = $user;
+    }
+
+    public function unwrap(): User
+    {
+        return $this->user;
     }
 
     public function getId(): Uuid

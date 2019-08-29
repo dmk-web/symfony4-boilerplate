@@ -51,11 +51,6 @@ class User implements UserInterface
         $this->password = $password;
     }
 
-    public function setRoles(array $roles)
-    {
-        $this->roles = $roles;
-    }
-
     public function isActivated(): bool
     {
         return $this->isActivated;
@@ -76,6 +71,11 @@ class User implements UserInterface
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
     }
 
     public function getSalt()

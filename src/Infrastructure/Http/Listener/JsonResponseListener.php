@@ -26,16 +26,22 @@ class JsonResponseListener
         }
 
         $request = $event->getRequest();
+        $response = JsonResponse::create();
 
         if (null !== $result) {
-            $response = JsonResponse::create();
-            $response->setJson($this->serializer->serialize($result, 'json'));
-            $response->setStatusCode($request->isMethod('POST') ? Response::HTTP_CREATED : Response::HTTP_OK);
+            $response->setJson($this->serialize($result));
+            $response->setStatusCode(
+                $request->isMethod('POST') ? Response::HTTP_CREATED : Response::HTTP_OK
+            );
         } else {
-            $response = Response::create();
             $response->setStatusCode(Response::HTTP_NO_CONTENT);
         }
 
         $event->setResponse($response);
+    }
+
+    private function serialize($result)
+    {
+        return sprintf('{"type": "SUCCESS","data": %s}', $this->serializer->serialize($result, 'json'));
     }
 }

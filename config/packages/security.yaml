@@ -5,7 +5,8 @@ services:
     autoconfigure: true
 
   security.user.api_user_provider:
-    class: App\Infrastructure\Security\AuthProvider
+    class: App\Application\Security\UserProvider
+    autowire: true
 
   App\Application\Security\LoggedUserProvider:
     autowire: true

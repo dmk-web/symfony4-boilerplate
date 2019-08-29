@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Doctrine\Transactions;
+namespace App\Domain\Common\Transactions;
 
 use Doctrine\ORM\EntityManager;
 

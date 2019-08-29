@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Doctrine\Events;
+namespace App\Domain\Common\Events;
 
 trait EventsTrait
 {

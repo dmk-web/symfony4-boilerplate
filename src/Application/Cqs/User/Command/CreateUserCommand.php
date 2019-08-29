@@ -6,9 +6,9 @@ namespace App\Application\Cqs\User\Command;
 use App\Application\Cqs\User\Exception\CreationException;
 use App\Application\Cqs\User\Input\CreateUserInput;
 use App\Application\Cqs\User\Output\UserOutput;
+use App\Domain\Common\Transactions\TransactionInterface;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Infrastructure\Doctrine\Transactions\TransactionInterface;
 
 class CreateUserCommand
 {
@@ -24,7 +24,7 @@ class CreateUserCommand
     public function execute(CreateUserInput $input)
     {
         if ($this->userRepository->isExistWithLogin($input->login)) {
-            throw new CreationException("Login '{$input->login}' is already busied.");
+            throw CreationException::loginIsBusy($input->login);
         }
 
         $user = new User($input->username, $input->login, password_hash($input->password, PASSWORD_BCRYPT),

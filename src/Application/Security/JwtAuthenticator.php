@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Security;
+namespace App\Application\Security;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;

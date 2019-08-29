@@ -2,33 +2,31 @@
 
 namespace App\Infrastructure\Http\Listener;
 
-
-use App\Domain\Common\Exceptions\RepositoryException;
+use App\Application\Exception\HandledException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
-class DomainExceptionListener
+class HandledExceptionListener
 {
     public function handle(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
 
-        $supports = is_subclass_of($exception, RepositoryException::class);
-
-        if (!$supports) {
+        if (!$exception instanceof HandledException) {
             return;
         }
 
-        $event->allowCustomResponseCode();
-
         $response = JsonResponse::create();
-        $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+        $response->headers->set('X-Response-Type', 'FAILURE');
+
+        $response->setStatusCode(JsonResponse::HTTP_BAD_REQUEST);
+
         $response->setData([
-            'type' => 'DOMAIN_ERROR',
-            'data' => $exception->getMessage()
+            'type' => $exception::getType(),
+            'message' => $exception->getMessage()
         ]);
 
         $event->setResponse($response);
+        $event->allowCustomResponseCode();
     }
 }

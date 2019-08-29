@@ -21,7 +21,7 @@ class ValidationExceptionListener
         $response = JsonResponse::create();
         $response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         $response->setData([
-            'error' => 'VALIDATION_ERROR',
+            'type' => 'VALIDATION_ERROR',
             'data' => $exception->getMessages()
         ]);
 

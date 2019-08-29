@@ -4,7 +4,6 @@ namespace App\Infrastructure\Http\Resolver;
 
 
 use App\Application\Exception\ValidationException;
-use App\Infrastructure\Exception\ArgumentResolvingException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
@@ -25,7 +24,7 @@ class InputResolver implements ArgumentValueResolverInterface
 
     public function supports(Request $request, ArgumentMetadata $argument)
     {
-        return strrpos($argument->getType(), 'Input');
+        return substr($argument->getType(), -5) === 'Input';
     }
 
     public function resolve(Request $request, ArgumentMetadata $argument)
@@ -34,21 +33,9 @@ class InputResolver implements ArgumentValueResolverInterface
         $content = $this->getContent($request, $argument);
 
         if ($argument->isVariadic()) {
-            $array = $this->deserialize($type, $content);
-
-            if (!is_array($array)) {
-                throw ArgumentResolvingException::notArray($argument->getName(), gettype($array));
-            }
-
-            yield from $array;
+            yield from $this->deserialize($type, $content);
         } else {
-            $item = $this->deserialize($type, $content);
-
-            if (null === $item && !$argument->isNullable()) {
-                throw ArgumentResolvingException::nullArgument($argument->getName());
-            }
-
-            yield $item;
+            yield $this->deserialize($type, $content);
         }
     }
 
@@ -82,12 +69,15 @@ class InputResolver implements ArgumentValueResolverInterface
     private function validate($input)
     {
         if (count($errors = $this->validator->validate($input)) > 0) {
-            $violationsCollection = iterator_to_array($errors);
-            throw new ValidationException(
-                array_map(function (ConstraintViolation $violation) {
-                    return null !== ($p = $violation->getPropertyPath()) ? "{$p}: {$violation->getMessage()}" : $violation->getMessage();
-                }, $violationsCollection)
-            );
+            $errorsArr = [];
+
+            /** @var ConstraintViolation $e */
+            foreach ($errors as $e) {
+                $prop = $e->getPropertyPath();
+                $errorsArr[] = null !== $prop ? "{$prop}: {$e->getMessage()}" : $e->getMessage();
+            }
+
+            throw new ValidationException($errorsArr);
         }
     }
 }
