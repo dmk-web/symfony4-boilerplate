@@ -1,0 +1,30 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  http.listener.jwt_not_found:
+    class: App\Infrastructure\Http\Listener\JwtToken\JWTNotFoundListener
+    tags:
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: handle }
+
+  http.listener.jwt_expired:
+    class: App\Infrastructure\Http\Listener\JwtToken\JWTExpiredListener
+    tags:
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_expired, method: handle }
+
+  http.listener.jwt_invalid:
+    class: App\Infrastructure\Http\Listener\JwtToken\JWTInvalidListener
+    tags:
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_invalid, method: handle }
+
+  http.listener.jwt_created:
+    class: App\Infrastructure\Http\Listener\JwtToken\JWTBlockedUserAuth
+    tags:
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: handle }
+
+  http.listener.jwt_authenticated:
+    class: App\Infrastructure\Http\Listener\JwtToken\JWTBlockedUserAuth
+    tags:
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_authenticated, method: handle }

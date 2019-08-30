@@ -1,3 +1,6 @@
+imports:
+  - { resource: 'jwt_listeners.yaml' }
+
 services:
   _defaults:
     autowire: true
