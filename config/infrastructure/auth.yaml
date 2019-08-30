@@ -5,5 +5,5 @@ services:
     public: false
 
   TokenAuthenticator:
-    class: App\Security\JwtAuthenticator
+    class: App\Application\Security\JwtAuthenticator
     arguments: ['@lexik_jwt_authentication.encoder']
