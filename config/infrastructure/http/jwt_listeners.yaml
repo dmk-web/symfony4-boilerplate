@@ -18,13 +18,3 @@ services:
     class: App\Infrastructure\Http\Listener\JwtToken\JWTInvalidListener
     tags:
       - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_invalid, method: handle }
-
-  http.listener.jwt_created:
-    class: App\Infrastructure\Http\Listener\JwtToken\JWTBlockedUserAuth
-    tags:
-      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: handle }
-
-  http.listener.jwt_authenticated:
-    class: App\Infrastructure\Http\Listener\JwtToken\JWTBlockedUserAuth
-    tags:
-      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_authenticated, method: handle }
