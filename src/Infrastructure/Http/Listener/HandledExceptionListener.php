@@ -23,7 +23,7 @@ class HandledExceptionListener
 
         $response->setData([
             'type' => $exception::getType(),
-            'message' => $exception->getMessage()
+            'data' => $exception->getMessage()
         ]);
 
         $event->setResponse($response);
